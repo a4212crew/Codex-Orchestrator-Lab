@@ -43,10 +43,17 @@ Requirements:
 
 Write-Host "Starting Codex..."
 
-codex exec $prompt
+$codexOutput = codex exec $prompt 2>&1 | Out-String
 
-Write-Host ""
-Write-Host "Codex execution finished."
-Write-Host "Review the working tree with:"
-Write-Host "  git status"
-Write-Host "  git diff"
+Write-Host "Collecting git diff..."
+
+$gitStatus = git status --short | Out-String
+$gitDiff = git diff | Out-String
+
+$comment = @"
+## Codex Result
+
+### Codex Output
+
+````text
+$codexOutput

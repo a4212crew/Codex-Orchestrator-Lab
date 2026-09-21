@@ -1,6 +1,6 @@
 import pytest
 
-from src.calculator import add, divide, modulo, multiply, subtract
+from src.calculator import add, divide, modulo, multiply, power, subtract
 
 
 def test_add():
@@ -36,3 +36,11 @@ def test_modulo():
 def test_modulo_by_zero():
     with pytest.raises(ZeroDivisionError):
         modulo(7, 0)
+
+
+def test_power():
+    assert power(2, 3) == 8
+
+
+def test_power_zero_exponent():
+    assert power(5, 0) == 1

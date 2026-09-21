@@ -124,8 +124,16 @@ $comment | gh issue comment $issue.number `
     --repo $Repo `
     --body-file -
 
+Write-Host "Updating issue labels..."
+
+gh issue edit $issue.number `
+    --repo $Repo `
+    --remove-label $Label `
+    --add-label "codex-review"
+
 Remove-Item $tempFile -Force -ErrorAction SilentlyContinue
 
 Write-Host ""
 Write-Host "Result posted successfully."
+Write-Host "Issue moved to codex-review."
 Write-Host "Issue: $($issue.url)"
